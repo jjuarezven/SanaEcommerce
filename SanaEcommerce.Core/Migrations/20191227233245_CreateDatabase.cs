@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace SanaEcommerce.Core.Migrations
 {
-    public partial class InitialMigration : Migration
+    public partial class CreateDatabase : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -81,7 +81,7 @@ namespace SanaEcommerce.Core.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                        .Annotation("Sqlite:Autoincrement", true),
                     Code = table.Column<string>(maxLength: 50, nullable: false),
                     CategoryId = table.Column<int>(nullable: false),
                     Name = table.Column<string>(maxLength: 100, nullable: false),

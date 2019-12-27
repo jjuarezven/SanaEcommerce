@@ -24,9 +24,10 @@ namespace SanaEcommerce.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<SanaContext>(options => options.UseInMemoryDatabase(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<SanaContext>(options => options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddControllersWithViews();
+            services.AddMvc();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

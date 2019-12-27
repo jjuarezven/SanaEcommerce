@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿
+using Microsoft.EntityFrameworkCore;
 using SanaEcommerce.Core.Models;
 using SanaEcommerce.Core.Repositories.Interfaces;
 using System;
@@ -19,5 +20,8 @@ namespace SanaEcommerce.Core.Repositories
         {
 
         }
+
+        //protected override void OnConfiguring(DbContextOptionsBuilder options)
+        //    => options.UseSqlite("Data Source=sqlitedemo.db");
     }
 }
