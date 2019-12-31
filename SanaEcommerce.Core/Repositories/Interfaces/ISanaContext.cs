@@ -13,5 +13,6 @@ namespace SanaEcommerce.Core.Repositories.Interfaces
         DbSet<Order> Orders { get; set; }
         DbSet<ProductCategory> ProductCategories { get; set; }
         DbSet<Product> Products { get; set; }
+        int SaveChanges();
     }
 }
