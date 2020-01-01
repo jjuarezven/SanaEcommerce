@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using SanaEcommerce.Core.Models;
 using SanaEcommerce.Core.Repositories;
 using SanaEcommerce.Core.Repositories.Interfaces;
+using SanaEcommerce.Core.Services.Interfaces;
 
 namespace SanaEcommerce.Web
 {
@@ -15,17 +16,19 @@ namespace SanaEcommerce.Web
     {
         private readonly ISanaContext _context;
         private readonly IProductRepository _productRepository;
+        private readonly IProductService _productService;
 
-        public CustomersController(ISanaContext context, IProductRepository productRepository)
+        public CustomersController(ISanaContext context, IProductRepository productRepository, IProductService productService)
         {
             _context = context;
             _productRepository = productRepository;
+            _productService = productService;
         }
 
         // GET: Customers
         public async Task<IActionResult> Index()
         {
-            var p = _productRepository.GetAll();
+            var p = _productService.GetAll();
             return View(await _context.Customers.ToListAsync());
         }
 

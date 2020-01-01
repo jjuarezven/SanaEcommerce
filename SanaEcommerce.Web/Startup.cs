@@ -10,6 +10,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SanaEcommerce.Core.Repositories;
 using SanaEcommerce.Core.Repositories.Interfaces;
+using SanaEcommerce.Core.Services;
+using SanaEcommerce.Core.Services.Interfaces;
 
 namespace SanaEcommerce.Web
 {
@@ -32,6 +34,8 @@ namespace SanaEcommerce.Web
             services.AddScoped<ISanaContext, SanaContext>();
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped<IProductCategoryRepository, ProductCategoryRepository>();
+            services.AddScoped<IProductService, ProductService>();
+            services.AddScoped<IProductCategoryService, ProductCategoryService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
