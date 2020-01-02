@@ -28,7 +28,15 @@ namespace SanaEcommerce.Core.Repositories
         public bool Save(Product product)
         {
             _context.Products.Add(product);
-            return _context.SaveChanges() != 0;
+            try
+            {
+                return _context.SaveChanges() != 0;
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
         }
     }
 }

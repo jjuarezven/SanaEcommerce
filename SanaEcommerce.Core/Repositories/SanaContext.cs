@@ -15,9 +15,17 @@ namespace SanaEcommerce.Core.Repositories
         public DbSet<Order> Orders { get; set; }
         public DbSet<ProductCategory> ProductCategories { get; set; }
         public DbSet<Product> Products { get; set; }
-        override public int SaveChanges()
+        public override int SaveChanges()
         {
-            return SaveChanges();
+            try
+            {
+                return SaveChanges();
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
         }
 
         public SanaContext(DbContextOptions<SanaContext> options) : base(options)
