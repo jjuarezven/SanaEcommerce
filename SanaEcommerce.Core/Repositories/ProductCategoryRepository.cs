@@ -8,8 +8,8 @@ namespace SanaEcommerce.Core.Repositories
 {
     public class ProductCategoryRepository : IProductCategoryRepository
     {
-        private readonly ISanaContext _context;
-        public ProductCategoryRepository(ISanaContext context)
+        private readonly SanaContext _context;
+        public ProductCategoryRepository(SanaContext context)
         {
             _context = context;
         }

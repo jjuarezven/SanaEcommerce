@@ -7,7 +7,15 @@
 <h1>Index</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create" class="btn btn-primary btn-large">Create New</a>
+    @if ((bool)Session["database"])
+    {
+        <button id="btnInmemory" class="btn btn-large btn-success pull-right" type="button" onclick="ChangeStorage('memory');">Get data from Memory</button>
+    }
+    else
+    {
+        <button id="btnDatabase" class="btn btn-large btn-success pull-right" type="button" onclick="ChangeStorage('database');">Get data from Database</button>
+    }
 </p>
 <table class="table">
     <thead>
@@ -39,3 +47,9 @@
 }
     </tbody>
 </table>
+
+<script type="text/javascript">
+    function ChangeStorage(storage) {
+        window.location.href = "/Products/index?storageMode=" + storage;
+    }
+</script>

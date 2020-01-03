@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -15,14 +16,16 @@ namespace SanaEcommerce.Web.Controllers
     {
         private readonly IProductService _productService;
 
+        public string SessionInfo_Mode { get; set; }
         public ProductsController(IProductService productService)
         {
             _productService = productService;
         }
 
         // GET: Products
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string storageMode)
         {
+            HttpContext.Session.SetString(SessionInfo_Mode, storageMode);
             return View(_productService.GetAll());
         }
 
@@ -54,7 +57,7 @@ namespace SanaEcommerce.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Product product)
+        public async Task<IActionResult> Create( Product product)
         {
             if (ModelState.IsValid && _productService.Save(product))
             {

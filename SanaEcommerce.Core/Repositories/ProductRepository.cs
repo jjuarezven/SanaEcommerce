@@ -9,8 +9,8 @@ namespace SanaEcommerce.Core.Repositories
 {
     public class ProductRepository : IProductRepository
     {
-        private readonly ISanaContext _context;
-        public ProductRepository(ISanaContext context)
+        private readonly SanaContext _context;
+        public ProductRepository(SanaContext context)
         {
             _context = context;
         }
@@ -26,17 +26,9 @@ namespace SanaEcommerce.Core.Repositories
         }
 
         public bool Save(Product product)
-        {
+        {            
             _context.Products.Add(product);
-            try
-            {
-                return _context.SaveChanges() != 0;
-            }
-            catch (Exception ex)
-            {
-
-                throw;
-            }
+            return _context.SaveChanges() > 0;
         }
     }
 }
