@@ -3,17 +3,15 @@ using SanaEcommerce.Core.Repositories;
 using SanaEcommerce.Core.Services.Interfaces;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace SanaEcommerce.Core.Services
 {
     public class ProductService: ProductRepository, IProductService
     {
-        private readonly InMemoryProducts _inMemoryStorage;
+        private readonly static InMemoryProducts _inMemoryStorage = new InMemoryProducts();
         public ProductService(SanaContext context) : base(context)
         {
-            _inMemoryStorage = new InMemoryProducts();
+            
         }
 
         public IEnumerable<Product> GetAllFromInMemory()

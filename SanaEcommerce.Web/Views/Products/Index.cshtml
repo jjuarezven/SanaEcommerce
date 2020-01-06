@@ -6,23 +6,24 @@
 
 <h1>Index</h1>
 
+
 <p>
-    <a asp-action="Create" class="btn btn-primary btn-large">Create New</a>
-    @if ((bool)Session["database"])
-    {
-        <button id="btnInmemory" class="btn btn-large btn-success pull-right" type="button" onclick="ChangeStorage('memory');">Get data from Memory</button>
-    }
-    else
-    {
-        <button id="btnDatabase" class="btn btn-large btn-success pull-right" type="button" onclick="ChangeStorage('database');">Get data from Database</button>
-    }
+<a asp-action="Create" asp-route-storageMode="@ViewData["storageMode"]" class="btn btn-primary btn-large">Create New</a>
+@if ((string)@ViewData["storageMode"] == "database")
+{
+    <button id="btnInmemory" class="btn btn-large btn-success float-right" type="button" onclick="ChangeStorage('memory');">Get data from Memory</button>
+}
+else
+{
+    <button id="btnDatabase" class="btn btn-large btn-success float-right" type="button" onclick="ChangeStorage('database');">Get data from Database</button>
+}
 </p>
 <table class="table">
     <thead>
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.Code)
-            </th>            
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.Name)
             </th>
@@ -32,19 +33,20 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Code)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Price)
-            </td>    
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Code)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
 

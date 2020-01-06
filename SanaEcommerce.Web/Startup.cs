@@ -1,10 +1,5 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -31,22 +26,12 @@ namespace SanaEcommerce.Web
             services.AddDbContext<SanaContext>(options => options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddControllersWithViews();
-            services.AddDistributedMemoryCache();
-
-            services.AddSession(options =>
-            {
-                // Set a short timeout for easy testing.
-                options.IdleTimeout = TimeSpan.FromSeconds(10);
-                options.Cookie.HttpOnly = true;
-                // Make the session cookie essential
-                options.Cookie.IsEssential = true;
-            });
-
             services.AddMvc();
+
             services.AddScoped<IProductRepository, ProductRepository>();
-            services.AddScoped<IProductCategoryRepository, ProductCategoryRepository>();
+            //services.AddScoped<IProductCategoryRepository, ProductCategoryRepository>();
             services.AddScoped<IProductService, ProductService>();
-            services.AddScoped<IProductCategoryService, ProductCategoryService>();
+            //services.AddScoped<IProductCategoryService, ProductCategoryService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -61,7 +46,7 @@ namespace SanaEcommerce.Web
                 app.UseExceptionHandler("/Home/Error");
             }
             app.UseStaticFiles();
-            app.UseSession();
+            //app.UseSession();
             app.UseRouting();
 
             app.UseAuthorization();
