@@ -1,3 +1,4 @@
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -24,14 +25,12 @@ namespace SanaEcommerce.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<SanaContext>(options => options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
-
+            services.AddAutoMapper(typeof(Startup));
             services.AddControllersWithViews();
             services.AddMvc();
 
             services.AddScoped<IProductRepository, ProductRepository>();
-            //services.AddScoped<IProductCategoryRepository, ProductCategoryRepository>();
             services.AddScoped<IProductService, ProductService>();
-            //services.AddScoped<IProductCategoryService, ProductCategoryService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

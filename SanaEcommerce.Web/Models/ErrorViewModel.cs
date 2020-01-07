@@ -1,5 +1,3 @@
-using System;
-
 namespace SanaEcommerce.Web.Models
 {
     public class ErrorViewModel

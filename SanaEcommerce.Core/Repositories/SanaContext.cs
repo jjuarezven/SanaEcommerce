@@ -1,10 +1,7 @@
 ﻿
 using Microsoft.EntityFrameworkCore;
 using SanaEcommerce.Core.Models;
-using SanaEcommerce.Core.Repositories.Interfaces;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace SanaEcommerce.Core.Repositories
 {

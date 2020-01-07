@@ -1,8 +1,7 @@
 ﻿using SanaEcommerce.Core.Models;
 using SanaEcommerce.Core.Repositories.Interfaces;
-using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Threading.Tasks;
 
 namespace SanaEcommerce.Core.Services.Interfaces
 {
@@ -11,8 +10,8 @@ namespace SanaEcommerce.Core.Services.Interfaces
     /// </summary>
     public interface IProductService : IProductRepository
     {
-        IEnumerable<Product> GetAllFromInMemory();
-        Product GetByIdFromInMemory(int id);
-        bool SaveToInMemory(Product product);
+        Task<IEnumerable<Product>> GetAllFromInMemory();
+        Task<Product> GetByIdFromInMemory(int id);
+        Task<bool> SaveToInMemory(Product product);
     }
 }

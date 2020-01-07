@@ -1,6 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using SanaEcommerce.Core.Models;
 using SanaEcommerce.Core.Services.Interfaces;
+using SanaEcommerce.Web.ViewModel;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace SanaEcommerce.Web.Controllers
@@ -8,23 +12,32 @@ namespace SanaEcommerce.Web.Controllers
     public class ProductsController : Controller
     {
         private readonly IProductService _productService;
-        public ProductsController(IProductService productService)
+        private readonly IMapper _mapper;
+        public ProductsController(IProductService productService, IMapper mapper)
         {
             _productService = productService;
+            _mapper = mapper;
         }
 
         // GET: Products
         public async Task<IActionResult> Index(string storageMode)
         {
             ViewData["storageMode"] = storageMode ?? "database";
+            IEnumerable<Product> products;
             if ((string)ViewData["storageMode"] == "database")
             {
-                return View(_productService.GetAll());
+                products = await _productService.GetAll();
             }
             else
             {
-                return View(_productService.GetAllFromInMemory());
+                products = await _productService.GetAllFromInMemory();
             }
+            IEnumerable<ProductViewModel> productsViewModel = _mapper.Map<IEnumerable<Product>, IEnumerable<ProductViewModel>>(products);
+            if (productsViewModel.Any())
+            {
+                return View(productsViewModel);
+            }
+            return View();
         }
 
         // GET: Products/Create
@@ -47,11 +60,11 @@ namespace SanaEcommerce.Web.Controllers
                 ViewData["storageMode"] = storageMode ?? "database";
                 if ((string)ViewData["storageMode"] == "database")
                 {
-                    success = _productService.Save(product);
+                    success = await _productService.Save(product);
                 }
                 else
                 {
-                    success = _productService.SaveToInMemory(product);
+                    success = await _productService.SaveToInMemory(product);
                 }
 
                 if (success)

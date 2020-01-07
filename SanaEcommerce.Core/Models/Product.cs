@@ -20,6 +20,7 @@ namespace SanaEcommerce.Core.Models
         [StringLength(100)]
         public string Name { get; set; }
 
+        [DataType(DataType.Currency)]
         public decimal Price { get; set; }
 
         public double Stock { get; set; }

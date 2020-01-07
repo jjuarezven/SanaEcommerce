@@ -1,7 +1,4 @@
 ﻿using SanaEcommerce.Core.Repositories.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace SanaEcommerce.Core.Services.Interfaces
 {

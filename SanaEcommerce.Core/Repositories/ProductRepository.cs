@@ -1,9 +1,8 @@
-﻿using SanaEcommerce.Core.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using SanaEcommerce.Core.Models;
 using SanaEcommerce.Core.Repositories.Interfaces;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Threading.Tasks;
 
 namespace SanaEcommerce.Core.Repositories
 {
@@ -15,20 +14,20 @@ namespace SanaEcommerce.Core.Repositories
             _context = context;
         }
 
-        public IEnumerable<Product> GetAll()
+        public async Task<IEnumerable<Product>> GetAll()
         {
-            return _context.Products.AsEnumerable();
+            return await _context.Products.ToListAsync();
         }
 
-        public Product GetById(int id)
+        public async Task<Product> GetById(int id)
         {
-            return _context.Products.Find(id);
+            return await _context.Products.FindAsync(id);
         }
 
-        public bool Save(Product product)
-        {            
-            _context.Products.Add(product);
-            return _context.SaveChanges() > 0;
+        public async Task<bool> Save(Product product)
+        {
+            await _context.Products.AddAsync(product);
+            return await _context.SaveChangesAsync() > 0;
         }
     }
 }

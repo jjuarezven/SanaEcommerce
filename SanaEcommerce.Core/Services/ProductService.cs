@@ -3,9 +3,13 @@ using SanaEcommerce.Core.Repositories;
 using SanaEcommerce.Core.Services.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace SanaEcommerce.Core.Services
 {
+    /// <summary>
+    /// The intent of services is inherit from repository classes and implement their own functionality when necessary (dealing with 2 or more business objects, for example)
+    /// </summary>
     public class ProductService: ProductRepository, IProductService
     {
         private readonly static InMemoryProducts _inMemoryStorage = new InMemoryProducts();
@@ -14,17 +18,17 @@ namespace SanaEcommerce.Core.Services
             
         }
 
-        public IEnumerable<Product> GetAllFromInMemory()
+        public async Task<IEnumerable<Product>> GetAllFromInMemory()
         {
-            return _inMemoryStorage.InMemoryProductsList;
+            return await Task.Run(() => _inMemoryStorage.InMemoryProductsList);
         }
 
-        public Product GetByIdFromInMemory(int id)
+        public async Task<Product> GetByIdFromInMemory(int id)
         {
-            return _inMemoryStorage.InMemoryProductsList.Find(x => x.Id == id);
+            return await Task.Run(() => _inMemoryStorage.InMemoryProductsList.Find(x => x.Id == id));
         }
 
-        public bool SaveToInMemory(Product product)
+        public async Task<bool> SaveToInMemory(Product product)
         {
             bool result;
             try
@@ -36,7 +40,7 @@ namespace SanaEcommerce.Core.Services
             {
                 result = false;
             }
-            return result;
+            return await Task.Run(() => result);
         }
     }
 }
